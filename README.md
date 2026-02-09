@@ -2,20 +2,20 @@
 
 TripNest is a premium, full-stack travel and tourism application designed to provide users with a seamless experience discovering and exploring world-class destinations. Built with a modern tech stack (MERN), it features rich interactive elements, dynamic filtering, and comprehensive travel data.
 
-## ✨ Premium Features
+##  Premium Features
 
-- 🌍 **Global Exploration**: Discover destinations across **29+ Indian States** and multiple international flagships including **Italy, Thailand, France, Japan, and Greece**.
-- 🔍 **Advanced Filtering System**:
+-  **Global Exploration**: Discover destinations across **29+ Indian States** and multiple international flagships including **Italy, Thailand, France, Japan, and Greece**.
+-  **Advanced Filtering System**:
     - **Dynamic State/Country Filters**: Intelligently extracts regions from the database for precise navigation.
     - **Categorized Discovery**: Specialized categories for Beach, Mountain, Heritage, Hill Stations, Wildlife, Pilgrimage, and more.
     - **Price & Rating Sorting**: Find the perfect stay within your budget and quality expectations.
-- 📸 **Rich Visual Experience**: High-quality imagery including custom local assets for iconic landmarks like **Shimla, Red Fort, Ramoji Film City, and Ayodhya**.
-- 🚊 **Integrated Logistics**: Real-time travel mode suggestions (Trains, Flights, Buses) with direct booking links.
-- 🏨 **Hotel Ecosystem**: Detailed stay recommendations with price points, ratings, and amenity lists for every destination.
-- 🌓 **Dynamic Interface**: Stunning dark/light mode support with smooth Framer Motion transitions and responsive layouts.
-- 🌓 **Interactive Maps**: Localized coordinates for all destinations using high-precision geolocation data.
+-  **Rich Visual Experience**: High-quality imagery including custom local assets for iconic landmarks like **Shimla, Red Fort, Ramoji Film City, and Ayodhya**.
+-  **Integrated Logistics**: Real-time travel mode suggestions (Trains, Flights, Buses) with direct booking links.
+-  **Hotel Ecosystem**: Detailed stay recommendations with price points, ratings, and amenity lists for every destination.
+-  **Dynamic Interface**: Stunning dark/light mode support with smooth Framer Motion transitions and responsive layouts.
+-  **Interactive Maps**: Localized coordinates for all destinations using high-precision geolocation data.
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 ### Frontend
 - **React 18** (Vite-powered for high performance)
@@ -32,7 +32,7 @@ TripNest is a premium, full-stack travel and tourism application designed to pro
 - **Bcrypt.js** (Enterprise-grade password hashing)
 - **Dotenv** (Secure environment management)
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### Prerequisites
 - Node.js (v18 or higher recommended)
@@ -64,9 +64,9 @@ TripNest is a premium, full-stack travel and tourism application designed to pro
    npm run dev
    ```
 
-Open [http://localhost:5173](http://localhost:5173) to see the application in action.
+Open (https://tripnest-explore.vercel.app/) to see the application in action.
 
-## 📈 Current Project Progress
+##  Current Project Progress
 
 - [x] Complete MERN stack foundation
 - [x] Advanced dynamic filtering by State/Country
@@ -77,7 +77,7 @@ Open [http://localhost:5173](http://localhost:5173) to see the application in ac
 - [ ] Real-time flight/hotel price tracking (Upcoming)
 - [ ] User itineraries & AI planning (Upcoming)
 
-## 📂 Project Structure
+##  Project Structure
 
 ```
 TripNest/
@@ -94,13 +94,13 @@ TripNest/
         └── utils/      # API Config & Helper Functions
 ```
 
-## 📜 License
+##  License
 
 This project is licensed under the ISC License - see the LICENSE file for details.
 
-## 🤝 Support
+##  Support
 
 For technical support or inquiries, please contact the development team at [support@tripnest.com](mailto:support@tripnest.com) or open a GitHub issue.
 
 ---
-*Empowering your next adventure with TripNest.* 🛰️🗺️✨
+*Empowering your next adventure with TripNest.* 
