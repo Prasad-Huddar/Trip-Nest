@@ -1,6 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import { ThemeProvider } from './context/ThemeContext';
+import ProtectedRoute from './components/ProtectedRoute';
+import UnauthenticatedRoute from './components/UnauthenticatedRoute';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Landing from './pages/Landing';
@@ -23,16 +25,47 @@ function App() {
                         <Navbar />
                         <main className="flex-grow">
                             <Routes>
-                                <Route path="/" element={<Landing />} />
-                                <Route path="/explore" element={<Explore />} />
-                                <Route path="/destination/:id" element={<DestinationDetails />} />
-                                <Route path="/book/:id" element={<BookingPage />} />
-                                <Route path="/booking" element={<BookingPage />} />
-                                <Route path="/dashboard" element={<Dashboard />} />
+                                {/* Public routes */}
+                                <Route path="/" element={
+                                    <UnauthenticatedRoute>
+                                        <Landing />
+                                    </UnauthenticatedRoute>
+                                } />
                                 <Route path="/about" element={<About />} />
                                 <Route path="/contact" element={<Contact />} />
+                                
+                                {/* Protected routes - require authentication */}
+                                <Route path="/explore" element={
+                                    <ProtectedRoute>
+                                        <Explore />
+                                    </ProtectedRoute>
+                                } />
+                                <Route path="/destination/:id" element={
+                                    <ProtectedRoute>
+                                        <DestinationDetails />
+                                    </ProtectedRoute>
+                                } />
+                                <Route path="/book/:id" element={
+                                    <ProtectedRoute>
+                                        <BookingPage />
+                                    </ProtectedRoute>
+                                } />
+                                <Route path="/booking" element={
+                                    <ProtectedRoute>
+                                        <BookingPage />
+                                    </ProtectedRoute>
+                                } />
+                                <Route path="/dashboard" element={
+                                    <ProtectedRoute>
+                                        <Dashboard />
+                                    </ProtectedRoute>
+                                } />
+                                
+                                {/* Public policy pages */}
                                 <Route path="/booking-policy" element={<BookingPolicy />} />
                                 <Route path="/safety-guide" element={<SafetyGuide />} />
+                                
+                                {/* OAuth callback */}
                                 <Route path="/auth/callback" element={<OAuthCallback />} />
                             </Routes>
                         </main>

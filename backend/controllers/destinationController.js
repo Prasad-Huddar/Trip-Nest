@@ -11,9 +11,15 @@ export const getDestinations = async (req, res, next) => {
         // Build query
         let query = {};
 
-        // Search by name or description
+        // Simple case-insensitive search
         if (search) {
-            query.$text = { $search: search };
+            const searchTerm = search.toLowerCase();
+            query.$or = [
+                { name: { $regex: searchTerm, $options: 'i' } },
+                { description: { $regex: searchTerm, $options: 'i' } },
+                { 'location.state': { $regex: searchTerm, $options: 'i' } },
+                { 'location.city': { $regex: searchTerm, $options: 'i' } }
+            ];
         }
 
         // Filter by category
@@ -21,14 +27,14 @@ export const getDestinations = async (req, res, next) => {
             query.category = category;
         }
 
-        // Filter by state
+        // Filter by state (case-insensitive)
         if (state) {
-            query['location.state'] = state;
+            query['location.state'] = { $regex: state, $options: 'i' };
         }
 
-        // Filter by country
+        // Filter by country (case-insensitive)
         if (country) {
-            query['location.country'] = country;
+            query['location.country'] = { $regex: country, $options: 'i' };
         }
 
         // Filter by price range

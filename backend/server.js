@@ -42,10 +42,22 @@ app.use((req, res, next) => {
 // Connect to MongoDB
 const connectDB = async () => {
     try {
-        const conn = await mongoose.connect(process.env.MONGODB_URI);
+        // Check if already connected
+        if (mongoose.connection.readyState === 1) {
+            console.log('MongoDB already connected');
+            return;
+        }
+        
+        console.log('Connecting to MongoDB with URI:', process.env.MONGODB_URI);
+        const conn = await mongoose.connect(process.env.MONGODB_URI, {
+            // Connection options to avoid multiple connections
+            maxPoolSize: 10,
+            serverSelectionTimeoutMS: 5000,
+            socketTimeoutMS: 45000,
+        });
         console.log(`MongoDB Connected: ${conn.connection.host}`);
+        console.log(`Database name: ${conn.connection.name}`);
     } catch (error) {
-        console.error(`Error: ${error.message}`);
         console.error(`Error: ${error.message}`);
         // process.exit(1); // Keep server running to send error response
     }
@@ -74,6 +86,20 @@ app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
     console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`);
+});
+
+// Handle uncaught exceptions
+process.on('uncaughtException', (err) => {
+    console.log('UNCAUGHT EXCEPTION! 💥 Shutting down...');
+    console.log(err.name, err.message);
+    process.exit(1);
+});
+
+// Handle unhandled promise rejections
+process.on('unhandledRejection', (err) => {
+    console.log('UNHANDLED REJECTION! 💥 Shutting down...');
+    console.log(err.name, err.message);
+    process.exit(1);
 });

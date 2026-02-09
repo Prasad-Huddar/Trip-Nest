@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FiSearch, FiMapPin, FiCalendar, FiUsers } from 'react-icons/fi';
+import { FiSearch, FiMapPin, FiCalendar, FiUsers, FiCompass } from 'react-icons/fi';
 import { motion } from 'framer-motion';
 
 const SearchBar = ({ onSearch, className = '', hideTravelers = false }) => {
@@ -13,7 +13,10 @@ const SearchBar = ({ onSearch, className = '', hideTravelers = false }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         const params = new URLSearchParams();
-        if (searchData.location) params.append('search', searchData.location);
+        if (searchData.location) {
+            // Only add search parameter, let backend handle the logic
+            params.append('search', searchData.location);
+        }
         if (onSearch) {
             onSearch(searchData);
         } else {
@@ -31,10 +34,10 @@ const SearchBar = ({ onSearch, className = '', hideTravelers = false }) => {
             <div className={`grid grid-cols-1 ${hideTravelers ? 'md:grid-cols-2' : 'md:grid-cols-3'} gap-4`}>
                 {/* Location */}
                 <div className="flex items-center space-x-3 px-6 py-4 bg-white/70 dark:bg-gray-800/50 backdrop-blur-md rounded-2xl border border-white/30 transition-all focus-within:ring-2 focus-within:ring-blue-500/30">
-                    <FiMapPin className="w-5 h-5 text-blue-600" />
+                    <FiCompass className="w-5 h-5 text-blue-600" />
                     <input
                         type="text"
-                        placeholder="Where to?"
+                        placeholder="Search destinations, cities, states..."
                         value={searchData.location}
                         onChange={(e) => setSearchData({ ...searchData, location: e.target.value })}
                         className="flex-1 bg-transparent outline-none placeholder-gray-500 dark:placeholder-gray-400 font-medium"

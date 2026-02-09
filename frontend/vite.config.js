@@ -13,4 +13,8 @@ export default defineConfig({
             },
         },
     },
+    define: {
+        // Production API URL will be set via environment variable
+        __API_URL__: JSON.stringify(process.env.VITE_API_URL || '/api')
+    }
 })

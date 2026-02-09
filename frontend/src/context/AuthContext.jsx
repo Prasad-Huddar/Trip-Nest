@@ -2,8 +2,8 @@ import { createContext, useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../utils/api';
 
-// Force absolute URL for development reliability
-const API_URL = 'http://127.0.0.1:5000/api';
+// Use environment variable for API URL
+const API_URL = import.meta.env.VITE_API_URL || '/api';
 
 const AuthContext = createContext();
 
@@ -22,23 +22,35 @@ export const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         // Check if user is logged in
+        console.log('AuthContext useEffect running');
         const token = localStorage.getItem('token');
         const savedUser = localStorage.getItem('user');
-
+        console.log('Token from localStorage:', token);
+        console.log('User from localStorage:', savedUser);
+            
         if (token && savedUser) {
-            setUser(JSON.parse(savedUser));
+            const parsedUser = JSON.parse(savedUser);
+            console.log('Setting user from localStorage:', parsedUser);
+            setUser(parsedUser);
+        } else {
+            console.log('No valid auth data in localStorage');
         }
         setLoading(false);
+        console.log('AuthContext loading set to false');
     }, []);
 
     const login = async (email, password) => {
         try {
-            const { data } = await api.post(`${API_URL}/auth/login`, { email, password });
+            console.log('Login function called with:', { email, password });
+            const { data } = await api.post(`/auth/login`, { email, password });
+            console.log('Login API response:', data);
             localStorage.setItem('token', data.token);
             localStorage.setItem('user', JSON.stringify(data.user));
             setUser(data.user);
+            console.log('User state set to:', data.user);
             return { success: true };
         } catch (error) {
+            console.error('Login error:', error);
             return {
                 success: false,
                 message: error.response?.data?.message || 'Login failed'
@@ -47,17 +59,23 @@ export const AuthProvider = ({ children }) => {
     };
 
     const register = async (name, email, password) => {
+        console.log('Register function called with:', { name, email, password });
         try {
-            const { data } = await api.post(`${API_URL}/auth/register`, { name, email, password });
+            console.log('Making API call to /auth/register');
+            const { data } = await api.post(`/auth/register`, { name, email, password });
+            console.log('API response:', data);
             localStorage.setItem('token', data.token);
             localStorage.setItem('user', JSON.stringify(data.user));
             setUser(data.user);
+            console.log('User registered and state set to:', data.user);
             return { success: true };
         } catch (error) {
+            console.error('Registration error:', error);
             let message = error.response?.data?.message || 'Registration failed';
             if (error.message === 'Network Error') {
                 message = 'Network Error: Unable to reach server. Is the backend running?';
             }
+            console.error('Registration error message:', message);
             return {
                 success: false,
                 message
@@ -66,9 +84,11 @@ export const AuthProvider = ({ children }) => {
     };
 
     const logout = () => {
+        console.log('Logout function called');
         localStorage.removeItem('token');
         localStorage.removeItem('user');
         setUser(null);
+        console.log('User state after logout:', null);
         navigate('/');
     };
 

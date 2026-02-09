@@ -262,7 +262,7 @@ const Navbar = () => {
             <AuthModal
                 isOpen={showAuthModal}
                 onClose={() => setShowAuthModal(false)}
-                initialView={authView}
+                initialMode={authView}
             />
         </>
     );

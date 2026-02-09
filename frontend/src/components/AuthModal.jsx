@@ -27,14 +27,19 @@ const AuthModal = ({ isOpen, onClose, initialMode = 'login' }) => {
         e.preventDefault();
         setLoading(true);
         setError('');
+        console.log('Form submitted with mode:', mode);
+        console.log('Form data:', formData);
 
         try {
             let result;
             if (mode === 'login') {
+                console.log('Calling login function');
                 result = await login(formData.email, formData.password);
             } else {
+                console.log('Calling register function');
                 result = await register(formData.name, formData.email, formData.password);
             }
+            console.log('Auth result:', result);
 
             if (result.success) {
                 onClose();
@@ -44,6 +49,7 @@ const AuthModal = ({ isOpen, onClose, initialMode = 'login' }) => {
                 setError(result.message);
             }
         } catch (err) {
+            console.error('Form submission error:', err);
             setError('An error occurred. Please try again.');
         } finally {
             setLoading(false);

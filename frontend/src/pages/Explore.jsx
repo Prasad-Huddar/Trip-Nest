@@ -68,7 +68,10 @@ const Explore = () => {
         setLoading(true);
         try {
             const params = new URLSearchParams(searchParams);
+            console.log('Fetching destinations with params:', params.toString());
             const { data } = await api.get(`/destinations?${params.toString()}`);
+            console.log('Received data:', data);
+            console.log('Number of destinations:', data.data?.length || 0);
             setDestinations(data.data || []);
         } catch (error) {
             console.error('Error fetching destinations:', error);
@@ -179,9 +182,36 @@ const Explore = () => {
                             <h1 className="text-5xl md:text-6xl font-display font-bold text-slate-900 dark:text-white mb-4">
                                 Explore <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">Amazing</span> Places
                             </h1>
-                            <p className="text-xl text-slate-600 dark:text-slate-400 max-w-3xl">
-                                Discover {filteredDestinations.length} incredible destinations across {states.length} states and {countries.length} countries
-                            </p>
+                            <div className="space-y-2">
+                                <p className="text-xl text-slate-600 dark:text-slate-400">
+                                    Discover {filteredDestinations.length} incredible destinations across {states.length} states and {countries.length} countries
+                                </p>
+                                {/* Search Summary */}
+                                {(filters.search || filters.state || filters.country || filters.category) && (
+                                    <div className="flex flex-wrap gap-2 text-sm">
+                                        {filters.search && (
+                                            <span className="bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full">
+                                                Search: "{filters.search}"
+                                            </span>
+                                        )}
+                                        {filters.state && (
+                                            <span className="bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200 px-3 py-1 rounded-full">
+                                                State: {filters.state}
+                                            </span>
+                                        )}
+                                        {filters.country && (
+                                            <span className="bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-200 px-3 py-1 rounded-full">
+                                                Country: {filters.country}
+                                            </span>
+                                        )}
+                                        {filters.category && (
+                                            <span className="bg-orange-100 dark:bg-orange-900/30 text-orange-800 dark:text-orange-200 px-3 py-1 rounded-full capitalize">
+                                                Category: {filters.category.replace('-', ' ')}
+                                            </span>
+                                        )}
+                                    </div>
+                                )}
+                            </div>
                         </div>
 
                         <div className="flex items-center gap-4">

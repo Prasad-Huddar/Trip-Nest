@@ -70,7 +70,7 @@ const destinationSchema = new mongoose.Schema({
     transportModes: [{
         mode: {
             type: String,
-            enum: ['flight', 'train', 'bus', 'car'],
+            enum: ['flight', 'train', 'bus', 'car', 'helicopter'],
             required: true
         },
         details: String,

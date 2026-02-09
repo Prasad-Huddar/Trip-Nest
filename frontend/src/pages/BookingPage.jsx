@@ -285,7 +285,7 @@ const BookingPage = () => {
                                     onClick={() => setActiveSection('transport')}
                                     className={`px-8 py-3 rounded-2xl font-black text-sm uppercase tracking-widest transition-all flex items-center gap-2 ${activeSection === 'transport' ? 'bg-blue-600 text-white' : 'text-slate-500 hover:bg-slate-50'}`}
                                 >
-                                    <FaPlane /> Transport
+                                    {tripData.transportMode === 'flight' ? <FaPlane /> : tripData.transportMode === 'train' ? <FaTrain /> : <FaBus />} Transport
                                     {tripData.selectedTransport && <FiCheckCircle />}
                                 </button>
                                 <button
@@ -321,7 +321,7 @@ const BookingPage = () => {
                                                 className={`w-full bg-white dark:bg-slate-900 p-6 rounded-[2rem] border-2 transition-all group flex items-center gap-8 ${tripData.selectedTransport?.id === item.id ? 'border-blue-600 shadow-xl' : 'border-transparent hover:border-slate-100 dark:hover:border-slate-800 shadow-sm'}`}
                                             >
                                                 <div className="w-16 h-16 bg-blue-50 dark:bg-blue-900/30 rounded-2xl flex items-center justify-center text-3xl group-hover:scale-110 transition-transform">
-                                                    {item.logo || <FaPlane className="text-blue-600" />}
+                                                    {item.logo || (tripData.transportMode === 'flight' ? <FaPlane className="text-blue-600" /> : tripData.transportMode === 'train' ? <FaTrain className="text-blue-600" /> : <FaBus className="text-blue-600" />)}
                                                 </div>
                                                 <div className="flex-grow text-left">
                                                     <h4 className="font-black text-xl mb-1">{item.name}</h4>
@@ -444,7 +444,10 @@ const BookingPage = () => {
                                     <div className="space-y-4">
                                         {tripData.selectedTransport && (
                                             <div className="flex justify-between items-center">
-                                                <span className="text-sm font-bold text-white/60">Transport ({tripData.selectedTransport.name})</span>
+                                                <span className="text-sm font-bold text-white/60 flex items-center gap-2">
+                                                    {tripData.transportMode === 'flight' ? <FaPlane size={14} /> : tripData.transportMode === 'train' ? <FaTrain size={14} /> : <FaBus size={14} />}
+                                                    Transport ({tripData.selectedTransport.name})
+                                                </span>
                                                 <span className="font-black">₹{(tripData.selectedTransport.price * tripData.travelers).toLocaleString()}</span>
                                             </div>
                                         )}
