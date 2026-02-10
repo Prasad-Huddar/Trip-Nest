@@ -184,8 +184,7 @@ const Navbar = () => {
 
                         {/* Mobile Menu Button */}
                         <button
-                            className={`md:hidden p-2 rounded-lg ${scrolled || !hasDarkHero ? 'text-slate-900 dark:text-white' : 'text-white'
-                                }`}
+                            className="md:hidden p-2 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-white shadow-md hover:shadow-lg transition-all"
                             onClick={() => setIsOpen(!isOpen)}
                         >
                             {isOpen ? <FiX size={24} /> : <FiMenu size={24} />}
@@ -204,22 +203,14 @@ const Navbar = () => {
                                 <div className="container-custom py-6 flex flex-col gap-4">
                                     {navLinks.map((link) => (
                                         link.isDropdown ? (
-                                            <div key={link.name} className="flex flex-col gap-2">
-                                                <span className="text-xs font-black text-slate-400 uppercase tracking-widest">{link.name}</span>
-                                                <div className="grid grid-cols-2 gap-3">
-                                                    {Object.values(link.sections).flat().map(item => (
-                                                        <Link
-                                                            key={item.name}
-                                                            to={item.path}
-                                                            className="flex items-center gap-2 py-2.5 px-3 text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-slate-800/50 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors"
-                                                            onClick={() => setIsOpen(false)}
-                                                        >
-                                                            <span className="text-lg">{item.icon}</span>
-                                                            <span className="text-sm font-bold">{item.name}</span>
-                                                        </Link>
-                                                    ))}
-                                                </div>
-                                            </div>
+                                            <Link
+                                                key={link.name}
+                                                to="/booking"
+                                                className="text-lg font-medium text-slate-800 dark:text-slate-100 py-2 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                                                onClick={() => setIsOpen(false)}
+                                            >
+                                                {link.name}
+                                            </Link>
                                         ) : (
                                             <Link
                                                 key={link.name}
