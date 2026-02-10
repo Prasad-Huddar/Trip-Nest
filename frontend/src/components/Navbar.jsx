@@ -71,12 +71,12 @@ const Navbar = () => {
                     <div className="container-custom flex justify-between items-center">
                         {/* Logo */}
                         <Link to="/" className="flex items-center gap-2 group">
-                            <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white text-xl font-bold shadow-lg shadow-blue-600/30 group-hover:scale-105 transition-transform">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+                            <div className="w-8 h-8 md:w-10 md:h-10 bg-blue-600 rounded-lg md:rounded-xl flex items-center justify-center text-white text-lg md:text-xl font-bold shadow-lg shadow-blue-600/30 group-hover:scale-105 transition-transform">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 md:w-6 md:h-6">
                                     <path d="M3.478 2.405a.75.75 0 00-.926.94l2.432 7.905H13.5a.75.75 0 010 1.5H4.984l-2.432 7.905a.75.75 0 00.926.94 60.519 60.519 0 0018.445-8.986.75.75 0 000-1.218A60.517 60.517 0 003.478 2.405z" />
                                 </svg>
                             </div>
-                            <span className={`text-2xl font-display font-bold ${scrolled
+                            <span className={`text-lg md:text-2xl font-display font-bold ${scrolled
                                 ? 'text-slate-900 dark:text-white'
                                 : (hasDarkHero ? 'text-white drop-shadow-md' : 'text-slate-900 dark:text-white')
                                 }`}>
@@ -206,15 +206,15 @@ const Navbar = () => {
                                         link.isDropdown ? (
                                             <div key={link.name} className="flex flex-col gap-2">
                                                 <span className="text-xs font-black text-slate-400 uppercase tracking-widest">{link.name}</span>
-                                                <div className="grid grid-cols-2 gap-4">
+                                                <div className="grid grid-cols-2 gap-3">
                                                     {Object.values(link.sections).flat().map(item => (
                                                         <Link
                                                             key={item.name}
                                                             to={item.path}
-                                                            className="flex items-center gap-2 py-2 text-slate-700 dark:text-slate-300"
+                                                            className="flex items-center gap-2 py-2.5 px-3 text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-slate-800/50 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors"
                                                             onClick={() => setIsOpen(false)}
                                                         >
-                                                            <span>{item.icon}</span>
+                                                            <span className="text-lg">{item.icon}</span>
                                                             <span className="text-sm font-bold">{item.name}</span>
                                                         </Link>
                                                     ))}
@@ -224,29 +224,40 @@ const Navbar = () => {
                                             <Link
                                                 key={link.name}
                                                 to={link.path}
-                                                className="text-lg font-medium text-slate-800 dark:text-slate-100"
+                                                className="text-lg font-medium text-slate-800 dark:text-slate-100 py-2 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                                                 onClick={() => setIsOpen(false)}
                                             >
                                                 {link.name}
                                             </Link>
                                         )
                                     ))}
+
+                                    {/* Theme Toggle in Mobile Menu */}
+                                    <button
+                                        onClick={toggleTheme}
+                                        className="flex items-center gap-3 py-3 px-4 bg-slate-100 dark:bg-slate-800 rounded-xl text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
+                                    >
+                                        {darkMode ? <FiSun size={20} /> : <FiMoon size={20} />}
+                                        <span className="font-medium">{darkMode ? 'Light Mode' : 'Dark Mode'}</span>
+                                    </button>
+
                                     <div className="h-px bg-slate-200 dark:bg-slate-700 my-2"></div>
                                     {!user ? (
                                         <button
                                             onClick={() => { setAuthView('login'); setShowAuthModal(true); setIsOpen(false); }}
-                                            className="w-full py-3 bg-blue-600 text-white rounded-xl font-medium shadow-lg shadow-blue-500/20"
+                                            className="w-full py-3 bg-blue-600 text-white rounded-xl font-medium shadow-lg shadow-blue-500/20 hover:bg-blue-700 transition-colors"
                                         >
                                             Sign In
                                         </button>
                                     ) : (
                                         <>
-                                            <Link to="/dashboard" className="flex items-center gap-3 py-2 text-slate-700 dark:text-slate-300" onClick={() => setIsOpen(false)}>
-                                                <FiUser /> Profile
+                                            <Link to="/dashboard" className="flex items-center gap-3 py-3 px-4 text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-slate-800/50 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors" onClick={() => setIsOpen(false)}>
+                                                <FiUser />
+                                                <span className="font-medium">Profile</span>
                                             </Link>
                                             <button
                                                 onClick={handleLogout}
-                                                className="flex items-center gap-3 py-2 text-red-600 text-left"
+                                                className="flex items-center gap-3 py-3 px-4 text-red-600 bg-red-50 dark:bg-red-900/20 rounded-xl hover:bg-red-100 dark:hover:bg-red-900/30 transition-colors text-left font-medium"
                                             >
                                                 <FiLogOut /> Logout
                                             </button>

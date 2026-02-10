@@ -48,6 +48,7 @@ export const AuthProvider = ({ children }) => {
             localStorage.setItem('user', JSON.stringify(data.user));
             setUser(data.user);
             console.log('User state set to:', data.user);
+            // No automatic redirect - stay on current page (landing page)
             return { success: true };
         } catch (error) {
             console.error('Login error:', error);
@@ -68,6 +69,7 @@ export const AuthProvider = ({ children }) => {
             localStorage.setItem('user', JSON.stringify(data.user));
             setUser(data.user);
             console.log('User registered and state set to:', data.user);
+            // No automatic redirect - stay on current page (landing page)
             return { success: true };
         } catch (error) {
             console.error('Registration error:', error);

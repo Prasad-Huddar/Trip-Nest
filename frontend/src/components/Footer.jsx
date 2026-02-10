@@ -37,13 +37,13 @@ const Footer = () => {
             <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-600/10 rounded-full blur-[120px]" />
 
             <div className="container-custom relative z-10">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-12 mb-20">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-8 md:gap-12 mb-12 md:mb-20">
                     {/* Brand & Newsletter */}
-                    <div className="lg:col-span-3">
-                        <h2 className="text-4xl font-black mb-6 tracking-tighter">
+                    <div className="lg:col-span-3 sm:col-span-2">
+                        <h2 className="text-3xl md:text-4xl font-black mb-4 md:mb-6 tracking-tighter">
                             TripNest<span className="text-indigo-500">.</span>
                         </h2>
-                        <p className="text-slate-400 text-lg mb-8 max-w-md leading-relaxed">
+                        <p className="text-slate-400 text-base md:text-lg mb-6 md:mb-8 max-w-md leading-relaxed">
                             Your premier gateway to the world's most breathtaking wonders.
                             We curate seamless, inspiring journeys designed to turn every
                             exploration into an unforgettable story.
@@ -110,11 +110,11 @@ const Footer = () => {
                                                 value={email}
                                                 onChange={(e) => setEmail(e.target.value)}
                                                 placeholder="Enter your email"
-                                                className="flex-grow bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:ring-2 focus:ring-indigo-500 focus:outline-none transition-all"
+                                                className="flex-grow bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm md:text-base focus:ring-2 focus:ring-indigo-500 focus:outline-none transition-all"
                                             />
                                             <button
                                                 type="submit"
-                                                className="px-6 py-3 bg-white text-slate-950 rounded-xl font-black hover:bg-slate-200 transition-all active:scale-95"
+                                                className="px-4 md:px-6 py-3 bg-white text-slate-950 rounded-xl font-black text-sm md:text-base hover:bg-slate-200 transition-all active:scale-95"
                                             >
                                                 Join
                                             </button>
@@ -127,14 +127,14 @@ const Footer = () => {
 
                     {/* Dynamic Links */}
                     {Object.entries(footerLinks).map(([title, links]) => (
-                        <div key={title} className="lg:col-span-1 md:col-span-1">
-                            <h3 className="text-sm font-black uppercase tracking-[0.3em] text-slate-500 mb-8">{title}</h3>
-                            <ul className="space-y-4">
+                        <div key={title} className="lg:col-span-1 sm:col-span-1">
+                            <h3 className="text-sm font-black uppercase tracking-[0.3em] text-slate-500 mb-6 md:mb-8">{title}</h3>
+                            <ul className="space-y-3 md:space-y-4">
                                 {links.map((link) => (
                                     <li key={link.name}>
                                         <Link
                                             to={link.path}
-                                            className="text-slate-400 hover:text-white transition-all duration-300 font-medium"
+                                            className="text-slate-400 hover:text-white transition-all duration-300 font-medium text-sm md:text-base"
                                         >
                                             {link.name}
                                         </Link>
@@ -146,13 +146,13 @@ const Footer = () => {
                 </div>
 
                 {/* Bottom Bar */}
-                <div className="pt-12 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-8">
-                    <div className="text-slate-500 text-sm font-medium">
-                        <p>&copy; {currentYear} TripNest Premium. Developed with ❤️ for global explorers.</p>
+                <div className="pt-8 md:pt-12 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6 md:gap-8">
+                    <div className="text-slate-500 text-xs md:text-sm font-medium text-center md:text-left">
+                        <p>&copy; {2024} TripNest Premium. Developed with ❤️ for global explorers.</p>
                         <p className="mt-1 text-indigo-400/60">Designed By Prasad Huddar</p>
                     </div>
 
-                    <div className="flex gap-6">
+                    <div className="flex gap-4 md:gap-6">
                         <a
                             href="#"
                             onClick={(e) => e.preventDefault()}

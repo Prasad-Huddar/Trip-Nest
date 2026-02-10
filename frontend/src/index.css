@@ -396,6 +396,22 @@
   .card {
     @apply rounded-xl;
   }
+  
+  /* Better touch targets for mobile */
+  button, a {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Prevent text size adjustment on mobile */
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+  
+  /* Smoother scrolling on mobile */
+  body {
+    -webkit-overflow-scrolling: touch;
+  }
 }
 
 @media (max-width: 768px) {
@@ -409,6 +425,28 @@
     margin-right: -1rem;
     padding-left: 1rem;
     padding-right: 1rem;
+  }
+  
+  /* Stack elements vertically on mobile */
+  .mobile-stack {
+    @apply flex-col;
+  }
+  
+  /* Full width on mobile */
+  .mobile-w-full {
+    @apply w-full;
+  }
+  
+  /* Smaller text on mobile */
+  .mobile-text-sm {
+    @apply text-sm;
+  }
+}
+
+/* Tablet specific */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .tablet-grid-2 {
+    @apply grid-cols-2;
   }
 }
 
@@ -427,5 +465,19 @@
 
   body {
     @apply bg-white text-black;
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  /* Larger tap targets for touch devices */
+  button, a, input[type="button"], input[type="submit"] {
+    min-height: 48px;
+    padding: 12px 16px;
+  }
+  
+  /* Remove hover effects on touch devices */
+  .card-hover {
+    @apply transform-none;
   }
 }
